@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+		<itemtype code="OKTALoginComponent" autocreate="true"
+				  generate="true" extends="SimpleCMSComponent"
+				  jaloclass="com.techhybris.bornoktassoaddon.jalo.components.OKTALoginComponent">
+			<description>This component is used to hold UI Based OKTA Login Widget. This is highly customizable. Refer
+				https://developer.okta.com/code/javascript/okta_sign-in_widget
+			</description>
+		</itemtype>
+	</itemtypes>
+</items>

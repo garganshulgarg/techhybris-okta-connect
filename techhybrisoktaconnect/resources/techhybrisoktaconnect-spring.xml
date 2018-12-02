@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="techhybrisoktaconnectSystemSetup" class="com.techhybris.setup.TechhybrisoktaconnectSystemSetup">
+        <!-- constructor arg injection example -->
+        <constructor-arg ref="techhybrisoktaconnectService"/>
+    </bean>
+
+    <bean id="techhybrisoktaconnectService" class="com.techhybris.service.impl.DefaultTechhybrisoktaconnectService">
+        <!-- setter injection example -->
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+
+
+    <!-- OKTA REST Service Start-->
+    <bean id="abstractOKTARestService"
+          class="com.techhybris.integration.rest.services.impl.AbstractOKTARestService"
+          abstract="true">
+    </bean>
+    <bean id="oktaRestServices"
+          class="com.techhybris.integration.rest.services.impl.DefaultOKTARESTServices"
+          parent="abstractOKTARestService"/>
+    <!-- OKTA REST Service END-->
+
+
+    <alias name="defaultOKTACustomerAccountService" alias="customerAccountService"/>
+    <bean id="defaultOKTACustomerAccountService"
+          class="com.techhybris.service.impl.DefaultOKTACustomerAccountService"
+          parent="defaultCustomerAccountService">
+        <property name="oktaRestServices" ref="oktaRestServices"/>
+    </bean>
+
+
+    <alias name="techHybrisOKTASSOService" alias="ssoUserService" />
+    <bean id="techHybrisOKTASSOService" class="com.techhybris.service.TechHybrisOKTASSOService"
+          parent="defaultSSOUserService" />
+			
+</beans>
